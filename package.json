@@ -1,0 +1,27 @@
+{
+  "name": "tilekit",
+  "description": "kit for managing google maps style tiles",
+  "version": "0.0.1",
+  "keywords": [ "google maps", "tile" ],
+  "homepage": "https://github.com/zbryikt/tiles",
+  "author": {
+    "name": "Kirby T. Wu",
+    "url": "http://tkirby.org/blog/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tkirby/tiles"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/paulmillr/chokidar/raw/master/README.md"
+    }
+  ],
+  "main": "main.js",
+  "dependencies": {
+    "coord": "zbryikt/coord",
+    "request": ">=2.36.0",
+    "pngjs": ">=0.4.0"
+  }
+}
