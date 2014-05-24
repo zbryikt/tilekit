@@ -52,8 +52,7 @@ console.log "total #{list.length} to fetch"
 isempty = (png, width, height) ->
   for y from 0 til height
     for x from 0 til width
-      v = [png.data[( y * width + x ) * 4 + i] for i from 0 til 4]reduce((->&1 + &2), 0)
-      if v!=0 => return false
+      if png.data[( y * width + x ) * 4 + 3] => return false
   return true
 
 download = (opt) ->
