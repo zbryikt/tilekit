@@ -47,5 +47,6 @@ module.exports = do
     config: 
       url: \http://ngis.tcd.gov.tw:8080/geoserver/wms
       twd: true
+      Z-MAX: 15
     form: LAYERS: \LandUse, SRS: \EPSG:3826
 
