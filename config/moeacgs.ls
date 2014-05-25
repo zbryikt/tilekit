@@ -36,6 +36,10 @@ module.exports = do
         BBOX: "121.555665,25.083541,121.577723,25.092480"
 
   slope: 
+    config:
+      Z-MIN: 11
+      Z-MAX: 14
+      TILE-POWER: 4
     form: LAYERS: \,WMS/LAYER/TW/G97_TW_DIPSLOPE_P_2013F
   fault: 
     form: LAYERS: ',WMS/LAYER/TW/G97_TW_B1_L_2013F,WMS/LAYER/TW/G97_TW_B1_L_2013F_T'
