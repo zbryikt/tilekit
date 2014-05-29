@@ -8,7 +8,7 @@ CoordMapType.prototype.getTile = (coord, zoom, doc) ->
       ..height = "#{@tileSize.height}px";
       ..opacity = "0.6"
       #..background = "url(http://zbryikt.github.io/flood-map/img/#zoom/#{coord.x}/#{coord.y}.png) center center no-repeat"
-      ..background = "url(http://zbryikt.github.io/tile-cityusage/#zoom/#{coord.x}/#{coord.y}.png) center center no-repeat"
+      ..background = "url(https://raw.githubusercontent.com/zbryikt/tile-cityusage/gh-pages/#zoom/#{coord.x}/#{coord.y}.png) center center no-repeat"
 
 main = ($scope,$timeout) ->
   $scope.taipei = new google.maps.LatLng 25.062706, 121.533563

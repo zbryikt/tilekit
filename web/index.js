@@ -11,7 +11,7 @@ CoordMapType.prototype.getTile = function(coord, zoom, doc){
   y$.width = this.tileSize.width + "px";
   y$.height = this.tileSize.height + "px";
   y$.opacity = "0.6";
-  y$.background = "url(http://zbryikt.github.io/tile-cityusage/" + zoom + "/" + coord.x + "/" + coord.y + ".png) center center no-repeat";
+  y$.background = "url(https://raw.githubusercontent.com/zbryikt/tile-cityusage/gh-pages/" + zoom + "/" + coord.x + "/" + coord.y + ".png) center center no-repeat";
   return x$;
 };
 main = function($scope, $timeout){
