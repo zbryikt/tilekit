@@ -17,9 +17,9 @@ CoordMapType.prototype.getTile = function(coord, zoom, doc){
 main = function($scope, $timeout){
   $scope.taipei = new google.maps.LatLng(25.062706, 121.533563);
   $scope.mapOption = {
-    zoom: 15,
-    minZoom: 15,
-    maxZoom: 17,
+    zoom: 12,
+    minZoom: 12,
+    maxZoom: 18,
     center: $scope.taipei
   };
   $scope.isAddrToggled = false;

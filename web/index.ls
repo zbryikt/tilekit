@@ -12,7 +12,7 @@ CoordMapType.prototype.getTile = (coord, zoom, doc) ->
 
 main = ($scope,$timeout) ->
   $scope.taipei = new google.maps.LatLng 25.062706, 121.533563
-  $scope.map-option = zoom: 15, minZoom: 15, maxZoom: 17, center: $scope.taipei
+  $scope.map-option = zoom: 12, minZoom: 12, maxZoom: 18, center: $scope.taipei
   $scope.isAddrToggled = false
   $scope.toggleAddr = -> $scope.isAddrToggled = !$scope.isAddrToggled
   $scope.init = ->
