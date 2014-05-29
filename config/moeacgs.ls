@@ -53,4 +53,15 @@ module.exports = do
       twd: true
       Z-MAX: 15
     form: LAYERS: \LandUse, SRS: \EPSG:3826
-
+  landusage:
+    config:
+      url: \http://ngis.tcd.gov.tw:8080/geoserver/nUrban/wms
+      twd: true
+      Z-MAX: 15
+    form:
+      LAYERS: \nUrban:nurban
+      TRANSPARENT: \true
+      SRS: \EPSG:3826
+      STYLES: ""
+      SERVICENAME: ""
+      VERSION: "1.1.1"
