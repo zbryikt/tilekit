@@ -64,4 +64,3 @@ module.exports = do
       SRS: \EPSG:3826
       STYLES: ""
       SERVICENAME: ""
-      VERSION: "1.1.1"
