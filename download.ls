@@ -10,7 +10,6 @@ if process.argv.length < 3 =>
 
 wms-name = process.argv.2
 
-verify = true
 useconfig = config.get wms-name
 {X, Y, Z, Z-MIN, Z-MAX, TILE-POWER, SIZE} = useconfig.config
 Z-MIN = parseInt(process.argv.3) or Z-MIN
@@ -20,7 +19,6 @@ if !SIZE => SIZE = tile.TILE_SIZE * TILE-RATE
 X = parseInt(process.argv.5) or X
 Y = parseInt(process.argv.6) or Y
 Z = parseInt(process.argv.7) or Z
-if verify => [X, Y, Z, Z-MIN, Z-MAX, TILE-POWER] = [13724, 7015, 14, 15, 15, 0]
 console.log "Use Configuration: #{wms-name} (#{useconfig.type})"
 console.log "Start Coordinate: #X #Y #Z"
 console.log "Tile Per Image: #{TILE-RATE * TILE-RATE}, size: #SIZE * #SIZE"
