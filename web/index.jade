@@ -20,3 +20,8 @@ html(lang="en")
     script(type="text/javascript",src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false")
   body(ng-app,ng-controller="main")
     #map
+    #panel
+      .btn.btn-default(ng-click="settype(0)",ng-class="{'active':type==0}") 無套疊
+      .btn.btn-default(ng-click="settype(1)",ng-class="{'active':type==1}") 淹水潛勢圖
+      .btn.btn-default(ng-click="settype(2)",ng-class="{'active':type==2}") 土地使用分區
+      .btn.btn-default(ng-click="settype(3)",ng-class="{'active':type==3}") 土地使用分區(官方直連)

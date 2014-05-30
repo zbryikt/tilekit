@@ -4,13 +4,6 @@ html,body
   width: 100%
   height: 100%
 
-#root
-  width: 100%
-
-#content
-  background-color: #009FB8!important
-  position: relative
-
 @-webkit-keyframes fadein
   0%
     opacity: 0
@@ -19,8 +12,6 @@ html,body
   100%
     opacity: 1
   
-
-
 #map
   display: block
   position: absolute
@@ -32,63 +23,10 @@ html,body
   opacity: 1
   -webkit-animation: fadein 2s 1 linear
 
-#where, #legends, #note
-  position: absolute
+#panel
+  position: fixed
+  top: 10px
+  left: 100px
   z-index: 999999
-  opacity: 1
-  -webkit-animation: fadein 2s 1 linear
-
-
-#note
-  right: 160px
-  top: 0
-  padding: 2px 20px 8px
-  background: rgba(255,255,255,0.9)
-  border-radius: 0 0 20px 20px
-
-#legends
-  position: absolute
-  z-index: 999999
-  right: 10px
-  top: 50px
-  background: rgba(255,255,255,0.9)
   padding: 10px
-  border-radius: 10px
-  font-size: 13px
-  line-height: 20px
-  .color
-    width: 20px
-    height: 20px
-    border: 1px solid #999
-    display: inline-block
-    vertical-align: middle
-  .text
-    display: inline-block
-
-#where
-  bottom: 20px
-  right: 20px
-  img
-    cursor: pointer
-  form
-    opacity: 0
-    width: 0
-    height: 80px
-    overflow: hidden
-    background: rgba(255,255,255,1.0)
-    padding: 10px
-    float: left
-    margin: 0 20px
-    border-radius: 10px
-    border: 2px solid #000
-    .close
-      cursor: pointer
-      font-size: 1.5em
-    -webkit-transition: opacity 1s, width 1s
-    .btn
-      width: 100%
-
-#where form.show
-  width: 400px
-  opacity: 1
-  -webkit-transition: opacity 1s, width 1s
+  background: rgba(0,0,0,0.3)

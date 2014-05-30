@@ -1,3 +1,4 @@
+type = 0
 CoordMapType = -> @ <<< {tileSize: it}
 CoordMapType.prototype.getTile = (c, zoom, doc) ->
   div = doc.createElement \div
@@ -25,20 +26,20 @@ CoordMapType.prototype.getTile = (c, zoom, doc) ->
       ..width = "#{@tileSize.width}px";
       ..height = "#{@tileSize.height}px";
       ..opacity = "0.6"
-      #..background = "url(http://zbryikt.github.io/flood-map/img/#zoom/#{c.x}/#{c.y}.png) center center no-repeat"
-      #..background = "url(https://raw.githubusercontent.com/zbryikt/tile-cityusage/gh-pages/#zoom/#{c.x}/#{c.y}.png) center center no-repeat"
-      #..background = "url(img/cityusage/#zoom/#{c.x}/#{c.y}.png) center center no-repeat"
-      ..background = "url(http://ngis.tcd.gov.tw:8080/geoserver/wms?Request=GetMap&SERVICE=WMS&VERSION=1.1.1&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&SRS=EPSG:3826&FORMAT=image/png&LAYERS=LandUse&width=256&height=256"+
-      "&BBOX=#minx,#miny,#maxx,#maxy)"
-      #"&BBOX=#{twd1.0},#{twd2.1},#{twd2.0},#{twd1.1})"
-      #305781.87034499,2767660.2237946377,306895.2206800509,2768758.358505346
+  console.log type, div
+  if type==1 => div.style.background = "url(http://zbryikt.github.io/flood-map/img/#zoom/#{c.x}/#{c.y}.png) center center no-repeat"
+  if type==2 => div.style.background = "url(https://raw.githubusercontent.com/zbryikt/tile-cityusage/gh-pages/#zoom/#{c.x}/#{c.y}.png) center center no-repeat"
+  if type==3 => div.style.background = "url(http://ngis.tcd.gov.tw:8080/geoserver/wms?Request=GetMap&SERVICE=WMS&VERSION=1.1.1&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&SRS=EPSG:3826&FORMAT=image/png&LAYERS=LandUse&width=256&height=256&BBOX=#minx,#miny,#maxx,#maxy)"
+  div
 
 main = ($scope,$timeout) ->
   #$scope.taipei = new google.maps.LatLng 25.062706, 121.533563
   $scope.taipei = new google.maps.LatLng 25.039155, 121.549678 #25.062706, 121.533563
   $scope.map-option = zoom: 18, minZoom: 12, maxZoom: 18, center: $scope.taipei
-  $scope.isAddrToggled = false
-  $scope.toggleAddr = -> $scope.isAddrToggled = !$scope.isAddrToggled
+  $scope.type = 0
+  $scope.settype = -> 
+    $scope.type = it
+    type := it
   $scope.init = ->
     $scope.map = new google.maps.Map(document.getElementById(\map), $scope.map-option)
     a = new CoordMapType(new google.maps.Size 256,256)
