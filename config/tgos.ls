@@ -1,6 +1,6 @@
 require! <[coord]>
 module.exports = do
-  locate: (v, ll1, ll2, size) ->
+  locate: (v, ll1, ll2, size, x, y, z) ->
     [x1,y1] = coord.to-twd97 {lat: ll1.lat!, lng: ll1.lng!}
     [x2,y2] = coord.to-twd97 {lat: ll2.lat!, lng: ll2.lng!}
     v.form = do

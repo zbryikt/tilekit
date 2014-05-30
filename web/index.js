@@ -3,21 +3,59 @@ var CoordMapType, main;
 CoordMapType = function(it){
   return this.tileSize = it, this;
 };
-CoordMapType.prototype.getTile = function(coord, zoom, doc){
-  var div, x$, y$;
+CoordMapType.prototype.getTile = function(c, zoom, doc){
+  var div, ll1, ll2, ll3, ll4, twd1, twd2, twd3, twd4, twd, minx, maxx, miny, maxy, x$, y$;
   div = doc.createElement('div');
+  ll1 = tile.t2ll(c.x, c.y, zoom);
+  ll2 = tile.t2ll(c.x + 1, c.y, zoom);
+  ll3 = tile.t2ll(c.x, c.y + 1, zoom);
+  ll4 = tile.t2ll(c.x + 1, c.y + 1, zoom);
+  twd1 = coord.toTwd97({
+    lat: ll1.lat(),
+    lng: ll1.lng()
+  });
+  twd2 = coord.toTwd97({
+    lat: ll2.lat(),
+    lng: ll2.lng()
+  });
+  twd3 = coord.toTwd97({
+    lat: ll3.lat(),
+    lng: ll3.lng()
+  });
+  twd4 = coord.toTwd97({
+    lat: ll4.lat(),
+    lng: ll4.lng()
+  });
+  twd = [twd1, twd2, twd3, twd4];
+  minx = Math.min.apply(null, twd.map(function(it){
+    return it[0];
+  }));
+  maxx = Math.max.apply(null, twd.map(function(it){
+    return it[0];
+  }));
+  miny = Math.min.apply(null, twd.map(function(it){
+    return it[1];
+  }));
+  maxy = Math.max.apply(null, twd.map(function(it){
+    return it[1];
+  }));
+  minx = twd1[0];
+  maxx = twd4[0];
+  miny = twd4[1];
+  maxy = twd1[1];
   x$ = div;
+  x$.innerHTML = zoom + " " + c;
   y$ = x$.style;
   y$.width = this.tileSize.width + "px";
   y$.height = this.tileSize.height + "px";
   y$.opacity = "0.6";
-  y$.background = "url(https://raw.githubusercontent.com/zbryikt/tile-cityusage/gh-pages/" + zoom + "/" + coord.x + "/" + coord.y + ".png) center center no-repeat";
+  y$.background = "url(http://ngis.tcd.gov.tw:8080/geoserver/wms?Request=GetMap&SERVICE=WMS&VERSION=1.1.1&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&SRS=EPSG:3826&FORMAT=image/png&LAYERS=LandUse&width=256&height=256" + ("&BBOX=" + minx + "," + miny + "," + maxx + "," + maxy + ")");
   return x$;
 };
 main = function($scope, $timeout){
-  $scope.taipei = new google.maps.LatLng(25.062706, 121.533563);
+  $scope.taipei = new google.maps.LatLng(25.039155, 121.549678);
   $scope.mapOption = {
-    zoom: 12,
+    zoom: 18,
     minZoom: 12,
     maxZoom: 18,
     center: $scope.taipei
