@@ -12,7 +12,6 @@ wms-name = process.argv.2
 
 verify = true
 useconfig = config.get wms-name
-console.log useconfig
 {X, Y, Z, Z-MIN, Z-MAX, TILE-POWER, SIZE} = useconfig.config
 Z-MIN = parseInt(process.argv.3) or Z-MIN
 Z-MAX = parseInt(process.argv.4) or Z-MAX
