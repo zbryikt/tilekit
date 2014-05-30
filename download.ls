@@ -69,7 +69,7 @@ download = (opt) ->
     <- set-timeout _, 0
     fs.createReadStream name .pipe(new pngjs.PNG filtertype: 4)
     .on \parsed, -> if isempty(@,SIZE,SIZE) => fs.writeFileSync name, blank
-    set-timeout (-> download opt),Math.random!*1300 + 300
+    set-timeout (-> download opt),Math.random!*900 + 200
   request makeurl(opt) .pipe r
 
 download useconfig
