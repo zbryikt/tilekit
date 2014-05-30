@@ -69,7 +69,9 @@ download = (opt) ->
   r = fs.create-write-stream "#name", autoClose: true
   r.on \close -> 
     <- set-timeout _, 0
-    fs.createReadStream name .pipe(new pngjs.PNG filtertype: 4)
+    fs.createReadStream name .pipe(
+      new pngjs.PNG filtertype: 4 .on \error -> fs.writeFileSync name, blank
+    )
     .on \parsed, -> if isempty(@,SIZE,SIZE) => fs.writeFileSync name, blank
     set-timeout (-> download opt),Math.random!*900 + 200
   request makeurl(opt) .pipe r
