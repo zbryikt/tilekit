@@ -36,7 +36,9 @@ breakdown = (x, y, z, name) ->
   obj = {z, x, y, ll1, ll2}
   filename = getname(name, obj)
   if fs.exists-sync(filename) and fs.statSync(filename)size==0 => fs.unlinkSync filename
-  if z >=Z-MIN and !fs.exists-sync(filename) => list.push obj
+  if z >=Z-MIN and !fs.exists-sync(filename) =>
+    list.push obj
+    if ( list.length % 10000 ) == 0 => console.log list.length
   breakdown x * 2    , y * 2    , z + 1, name
   breakdown x * 2 + 1, y * 2    , z + 1, name
   breakdown x * 2    , y * 2 + 1, z + 1, name
