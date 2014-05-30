@@ -1,5 +1,4 @@
-#require! <[coord ./tgos]>
-require! <[coord ./nlsc ./moeacgs]>
+require! <[coord ./nlsc ./moeacgs ./tgos]>
 
 # config protocol
 # { form: {...}, config: { 
@@ -23,7 +22,7 @@ config = do
   type: {}
   item: {}
 
-for item in [moeacgs, nlsc] #[tgos]
+for item in [moeacgs, nlsc, tgos]
   config.type <<< item.type
   config.item <<< item.item
 

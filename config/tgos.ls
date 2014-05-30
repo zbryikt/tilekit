@@ -9,7 +9,7 @@ module.exports = do
         Z: 3
         Z-MIN: 11
         Z-MAX: 11
-        TILE-POWER:  8
+        TILE-POWER:  3
       form: do
         op: \image
         res: \HAZARD_FLOOD_P.cfg
@@ -18,7 +18,6 @@ module.exports = do
         c = {} <<< @config <<< opt.config
         f = {} <<< @form <<< opt.form
         {type: opt.type, config: c, form: f, locate: @locate}
-      locate: (ll1, ll2, size, x, y, z) ->
       locate: (ll1, ll2, size, x, y, z) ->
         [x1,y1] = coord.to-twd97 {lat: ll1.lat!, lng: ll1.lng!}
         [x2,y2] = coord.to-twd97 {lat: ll2.lat!, lng: ll2.lng!}
@@ -31,7 +30,8 @@ module.exports = do
           Height: size
   item:
     flood: 
+      type: \tgos
       form: 
         layer: \dbo.1DR600_201208A
-        keystr: \Pkce9bTqsnJMR4ILNemlEg%3D%3D # need update every time 
+        keystr: \eecu%2BH58wzPf8cTEPGRV5g%3D%3D # need update every time 
 
