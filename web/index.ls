@@ -23,8 +23,9 @@ CoordMapType.prototype.getTile = (c, zoom, doc) ->
   div
     ..innerHTML = "#zoom #c"
     ..style
-      ..width = "#{@tileSize.width}px";
-      ..height = "#{@tileSize.height}px";
+      ..width = "#{@tileSize.width}px"
+      ..height = "#{@tileSize.height}px"
+      ..border = "1px solid #000"
       ..opacity = "0.6"
   console.log type, div
   if type==1 => div.style.background = "url(http://zbryikt.github.io/flood-map/img/#zoom/#{c.x}/#{c.y}.png) center center no-repeat"
@@ -35,7 +36,7 @@ CoordMapType.prototype.getTile = (c, zoom, doc) ->
 main = ($scope,$timeout) ->
   #$scope.taipei = new google.maps.LatLng 25.062706, 121.533563
   $scope.taipei = new google.maps.LatLng 25.039155, 121.549678 #25.062706, 121.533563
-  $scope.map-option = zoom: 18, minZoom: 12, maxZoom: 18, center: $scope.taipei
+  $scope.map-option = zoom: 18, minZoom: 8, maxZoom: 18, center: $scope.taipei
   $scope.type = 0
   $scope.settype = -> 
     $scope.type = it

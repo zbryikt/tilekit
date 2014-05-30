@@ -49,6 +49,7 @@ CoordMapType.prototype.getTile = function(c, zoom, doc){
   y$ = x$.style;
   y$.width = this.tileSize.width + "px";
   y$.height = this.tileSize.height + "px";
+  y$.border = "1px solid #000";
   y$.opacity = "0.6";
   console.log(type, div);
   if (type === 1) {
@@ -66,7 +67,7 @@ main = function($scope, $timeout){
   $scope.taipei = new google.maps.LatLng(25.039155, 121.549678);
   $scope.mapOption = {
     zoom: 18,
-    minZoom: 12,
+    minZoom: 8,
     maxZoom: 18,
     center: $scope.taipei
   };
