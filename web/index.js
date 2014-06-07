@@ -5,7 +5,7 @@ CoordMapType = function(it){
   return this.tileSize = it, this;
 };
 CoordMapType.prototype.getTile = function(c, zoom, doc){
-  var div, ll1, ll2, ll3, ll4, twd1, twd2, twd3, twd4, twd, minx, maxx, miny, maxy, x$, y$;
+  var div, ll1, ll2, ll3, ll4, twd1, twd2, twd3, twd4, twd, minx, maxx, miny, maxy, minlx, maxlx, minly, maxly, x$, y$;
   div = doc.createElement('div');
   ll1 = tile.t2ll(c.x, c.y, zoom);
   ll2 = tile.t2ll(c.x + 1, c.y, zoom);
@@ -44,6 +44,10 @@ CoordMapType.prototype.getTile = function(c, zoom, doc){
   maxx = twd4[0];
   miny = twd4[1];
   maxy = twd1[1];
+  minlx = ll1.lng();
+  maxlx = ll4.lng();
+  minly = ll4.lat();
+  maxly = ll1.lat();
   x$ = div;
   x$.innerHTML = zoom + " " + c;
   y$ = x$.style;
@@ -60,6 +64,36 @@ CoordMapType.prototype.getTile = function(c, zoom, doc){
   }
   if (type === 3) {
     div.style.background = "url(http://ngis.tcd.gov.tw:8080/geoserver/wms?Request=GetMap&SERVICE=WMS&VERSION=1.1.1&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&SRS=EPSG:3826&FORMAT=image/png&LAYERS=LandUse&width=256&height=256&BBOX=" + minx + "," + miny + "," + maxx + "," + maxy + ")";
+  }
+  if (type === 4) {
+    div.style.background = "url(http://210.69.81.220/geo4oracle/mapagent/mapagent.fcgi?Request=GetMap&SERVICE=WMS&VERSION=1.1.1&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&SRS=EPSG:4326&FORMAT=image/png&LAYERS=,WMS/LAYER/TW/G97_TW_DIPSLOPE_P_2013F&width=256&height=256&BBOX=" + minlx + "," + minly + "," + maxlx + "," + maxly + ") center center no-repeat";
+  }
+  if (type === 5) {
+    div.style.background = "url(http://210.69.81.220/geo4oracle/mapagent/mapagent.fcgi?Request=GetMap&SERVICE=WMS&VERSION=1.1.1&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&SRS=EPSG:4326&FORMAT=image/png&LAYERS=,WMS/LAYER/TW/G97_TW_DIPSLOPECLASS_P_2013F&width=256&height=256&BBOX=" + minlx + "," + minly + "," + maxlx + "," + maxly + ") center center no-repeat";
+  }
+  if (type === 6) {
+    div.style.background = "url(http://210.69.81.220/geo4oracle/mapagent/mapagent.fcgi?Request=GetMap&SERVICE=WMS&VERSION=1.1.1&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&SRS=EPSG:4326&FORMAT=image/png&LAYERS=,WMS/LAYER/TW/G97_TW_B1_L_2013F&width=256&height=256&BBOX=" + minlx + "," + minly + "," + maxlx + "," + maxly + ") center center no-repeat";
+  }
+  if (type === 7) {
+    div.style.background = "url(http://210.69.81.220/geo4oracle/mapagent/mapagent.fcgi?Request=GetMap&SERVICE=WMS&VERSION=1.1.1&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&SRS=EPSG:4326&FORMAT=image/png&LAYERS=,WMS/LAYER/TW/G97_TW_DEBRISFLOW_P_2013F&width=256&height=256&BBOX=" + minlx + "," + minly + "," + maxlx + "," + maxly + ") center center no-repeat";
+  }
+  if (type === 8) {
+    div.style.background = "url(http://210.69.81.220/geo4oracle/mapagent/mapagent.fcgi?Request=GetMap&SERVICE=WMS&VERSION=1.1.1&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&SRS=EPSG:4326&FORMAT=image/png&LAYERS=,WMS/LAYER/TW/G97_TW_LANDSLIDE_P_2013F&width=256&height=256&BBOX=" + minlx + "," + minly + "," + maxlx + "," + maxly + ") center center no-repeat";
+  }
+  if (type === 9) {
+    div.style.background = "url(http://210.69.81.220/geo4oracle/mapagent/mapagent.fcgi?Request=GetMap&SERVICE=WMS&VERSION=1.1.1&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&SRS=EPSG:4326&FORMAT=image/png&LAYERS=,WMS/LAYER/TW/G97_TW_ROCK_P_2013F&width=256&height=256&BBOX=" + minlx + "," + minly + "," + maxlx + "," + maxly + ") center center no-repeat";
+  }
+  if (type === 10) {
+    div.style.background = "url(http://210.69.81.220/geo4oracle/mapagent/mapagent.fcgi?Request=GetMap&SERVICE=WMS&VERSION=1.1.1&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&SRS=EPSG:4326&FORMAT=image/png&LAYERS=,WMS/LAYER/TW/G97_TW_SUTP_P_2013F&width=256&height=256&BBOX=" + minlx + "," + minly + "," + maxlx + "," + maxly + ") center center no-repeat";
+  }
+  if (type === 11) {
+    div.style.background = "url(http://210.69.81.220/geo4oracle/mapagent/mapagent.fcgi?Request=GetMap&SERVICE=WMS&VERSION=1.1.1&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&SRS=EPSG:4326&FORMAT=image/png&LAYERS=,WMS/LAYER/TW/G97_TW_DEPSLIDE_P_2013F&width=256&height=256&BBOX=" + minlx + "," + minly + "," + maxlx + "," + maxly + ") center center no-repeat";
+  }
+  if (type === 12) {
+    div.style.background = "url(http://210.69.81.220/geo4oracle/mapagent/mapagent.fcgi?Request=GetMap&SERVICE=WMS&VERSION=1.1.1&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&SRS=EPSG:4326&FORMAT=image/png&LAYERS=,WMS/LAYER/TW/G97_TW_DEBRISPOTEN_P_2013F&width=256&height=256&BBOX=" + minlx + "," + minly + "," + maxlx + "," + maxly + ") center center no-repeat";
+  }
+  if (type === 13) {
+    div.style.background = "url(http://210.69.81.220/geo4oracle/mapagent/mapagent.fcgi?Request=GetMap&SERVICE=WMS&VERSION=1.1.1&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&SRS=EPSG:4326&FORMAT=image/png&LAYERS=,WMS/LAYER/TW/G97_TW_HAZZONE_P_2013F&width=256&height=256&BBOX=" + minlx + "," + minly + "," + maxlx + "," + maxly + ") center center no-repeat";
   }
   return div;
 };

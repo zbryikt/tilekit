@@ -46,12 +46,27 @@ module.exports = do
         Z-MAX: 14
         TILE-POWER: 4
       form: LAYERS: \,WMS/LAYER/TW/G97_TW_DIPSLOPE_P_2013F
-    fault: 
+    fault: # 斷層
       type: \mapagent
       form: LAYERS: ',WMS/LAYER/TW/G97_TW_B1_L_2013F,WMS/LAYER/TW/G97_TW_B1_L_2013F_T'
-    debrisflow: 
+    debrisflow: # 土石流分佈
       type: \mapagent
       form: LAYERS: \,WMS/LAYER/TW/G97_TW_DEBRISFLOW_P_2013F
-    landslide: 
+    landslide: # 山崩潛勢
       type: \mapagent
       form: LAYERS: \,WMS/LAYER/TW/G97_TW_LANDSLIDE_P_2013F
+    rock: # 落石潛勢
+      type: \mapagent
+      form: LAYERS: \,WMS/LAYER/TW/G97_TW_ROCK_P_2013F
+    sutp: # 岩屑崩滑潛勢
+      type: \mapagent
+      form: LAYERS: \,WMS/LAYER/TW/G97_TW_SUTP_P_2013F
+    depslide: # 岩體滑動復發潛勢
+      type: \mapagent
+      form: LAYERS: \,WMS/LAYER/TW/G97_TW_DEPSLIDE_P_2013F
+    debrispoten: # 集水區土石流潛勢
+      type: \mapagent
+      form: LAYERS: \,WMS/LAYER/TW/G97_TW_DEBRISPOTEN_P_2013F
+    hazard: # 重大崩坍範圍
+      type: \mapagent
+      form: LAYERS: \,WMS/LAYER/TW/G97_TW_HAZZONE_P_2013F
