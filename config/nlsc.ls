@@ -30,6 +30,7 @@ module.exports = do
     # http://59.125.100.80/tcdmap/rest/services/TCDGIS/URBAN_LANDUSE_ZONE/MapServer/tile/10/10675/8375
     # http://maps.nlsc.gov.tw/S_Maps/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=URBAN
     #  &STYLE=_null&TILEMATRIXSET=EPSG:3857&TILEMATRIX=EPSG:3857:18&TILEROW=112219&TILECOL=219566&FORMAT=image/png
+    # check http://maps.nlsc.gov.tw/S_Maps/wmts for service list, although land use is not inside.
     cityusage_wmts:
       type: \wmts
       config:
