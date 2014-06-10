@@ -70,3 +70,10 @@ module.exports = do
     hazard: # 重大崩坍範圍
       type: \mapagent
       form: LAYERS: \,WMS/LAYER/TW/G97_TW_HAZZONE_P_2013F
+    dangerzone: # 各潛勢圖總和
+      type: \mapagent
+      config:
+        Z-MIN: 11
+        Z-MAX: 14
+        TILE-POWER: 4
+      form: LAYERS: ",WMS/LAYER/TW/G97_TW_LANDSLIDE_P_2013F,WMS/LAYER/TW/G97_TW_ROCK_P_2013F,WMS/LAYER/TW/G97_TW_SUTP_P_2013F,WMS/LAYER/TW/G97_TW_DEPSLIDE_P_2013F,WMS/LAYER/TW/G97_TW_DEBRISPOTEN_P_2013F,WMS/LAYER/TW/G97_TW_DIPSLOPE_P_2013F"

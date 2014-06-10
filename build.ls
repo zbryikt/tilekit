@@ -1,14 +1,24 @@
 require! <[fs pngjs]>
 
-IMGDIR = \img/cityusage/
-DESDIR = \web/img/cityusage/
+IMGDIR = \img/cityusage_wmts/
+DESDIR = \web/img/cityusage_wmts/
 files = [n.replace(\.png, "")split(\-)map(->parseInt(it)) for n in (fs.readdir-sync(IMGDIR)filter(->/\.png/exec it))]
-TILE_POW = 3
-TILE_RATE = 8
+TILE_POW = 0
+TILE_RATE = 1
 
+min = ->
+  min = -1
+  for i from 0 til it.length => if min == -1 or min > it[i] => min = it[i]
+  min
+
+max = ->
+  max = -1
+  for i from 0 til it.length => if max == -1 or max > it[i] => max = it[i]
+  max
 
 range = do
- z: min: Math.min.apply(null, [it.0 for it in files]), max: Math.max.apply(null, [it.0 for it in files])
+ #z: min: Math.min.apply(null, [it.0 for it in files]), max: Math.max.apply(null, [it.0 for it in files])
+ z: min: min([it.0 for it in files]), max: max([it.0 for it in files])
  x: min: 0, max: 0
  y: min: 0, max: 0
  bit: {}
@@ -22,6 +32,7 @@ range = do
    i1 = parseInt(idx / 32)
    i2 = idx % 32
    size = 1 .<<. (z - @z.min)
+   console.log z, size, size * size / 32
    #console.log z, size * size / 32, i1, i2
    if !@bit[z] =>
      @bit[z] = new Array size * size / 32
@@ -61,7 +72,7 @@ build = (src, des, cb) ->
                 if v => break
               if v => break
 
-          range.set xw + x1, yw + y1, zw, v
+          #range.set xw + x1, yw + y1, zw, v
           if !v => continue
           png = new pngjs.PNG filterType: 4, width: 256, height: 256
           for x from 0 til 256
@@ -113,10 +124,10 @@ console.log "total #{files.length} files to parse"
 #console.log files.join \\n
 
 worker = ->
-  if files.length == 0 => 
-    fs.write-file-sync "bits.json", JSON.stringify(range.bit)
-    console.log "done"
-    return
+  #if files.length == 0 => 
+  #  fs.write-file-sync "bits.json", JSON.stringify(range.bit)
+  #  console.log "done"
+  #  return
   file = files.splice(0,1)0
   console.log files.length, file
   build file, DESDIR, (-> set-timeout((-> worker!), 0 ))
