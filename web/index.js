@@ -55,7 +55,6 @@ CoordMapType.prototype.getTile = function(c, zoom, doc){
   y$.height = this.tileSize.height + "px";
   y$.border = "1px solid #000";
   y$.opacity = "0.6";
-  console.log(type, div);
   if (type === 1) {
     div.style.background = "url(http://zbryikt.github.io/flood-map/img/" + zoom + "/" + c.x + "/" + c.y + ".png) center center no-repeat";
   }
@@ -99,9 +98,15 @@ CoordMapType.prototype.getTile = function(c, zoom, doc){
     if (zoom === 18) {
       ref$ = [17, parseInt(c.x / 2), parseInt(c.y / 2)], z = ref$[0], x = ref$[1], y = ref$[2];
       ref$ = [(c.x % 2) * 256, (c.y % 2) * 256], dx = ref$[0], dy = ref$[1];
+      if (!tilevector.check(z, x, y)) {
+        return div;
+      }
       div.style.background = "url(/tile/" + z + "/" + x + "/" + y + ".png) -" + dx + "px -" + dy + "px no-repeat";
       div.style.backgroundSize = "512px 512px";
     } else {
+      if (!tilevector.check(zoom, c.x, c.y)) {
+        return div;
+      }
       div.style.background = "url(/tile/" + zoom + "/" + c.x + "/" + c.y + ".png) center center no-repeat";
     }
   }

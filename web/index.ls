@@ -31,7 +31,6 @@ CoordMapType.prototype.getTile = (c, zoom, doc) ->
       ..height = "#{@tileSize.height}px"
       ..border = "1px solid #000"
       ..opacity = "0.6"
-  console.log type, div
   if type==1 => div.style.background = "url(http://zbryikt.github.io/flood-map/img/#zoom/#{c.x}/#{c.y}.png) center center no-repeat"
   if type==2 => div.style.background = "url(https://raw.githubusercontent.com/zbryikt/tile-cityusage/gh-pages/#zoom/#{c.x}/#{c.y}.png) center center no-repeat"
   if type==3 => div.style.background = "url(http://ngis.tcd.gov.tw:8080/geoserver/wms?Request=GetMap&SERVICE=WMS&VERSION=1.1.1&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&SRS=EPSG:3826&FORMAT=image/png&LAYERS=LandUse&width=256&height=256&BBOX=#minx,#miny,#maxx,#maxy)"
@@ -49,9 +48,12 @@ CoordMapType.prototype.getTile = (c, zoom, doc) ->
     if zoom == 18 =>
       [z,x,y] = [17, parseInt(c.x / 2), parseInt(c.y / 2)]
       [dx,dy] = [ ( (c.x % 2) ) * 256, ( (c.y % 2) ) * 256]
+      if !tilevector.check(z, x, y) => return div
       div.style.background = "url(/tile/#z/#x/#y.png) -#{dx}px -#{dy}px no-repeat"
       div.style.backgroundSize = "512px 512px"
-    else div.style.background = "url(/tile/#zoom/#{c.x}/#{c.y}.png) center center no-repeat"
+    else 
+      if !tilevector.check(zoom, c.x, c.y) => return div
+      div.style.background = "url(/tile/#zoom/#{c.x}/#{c.y}.png) center center no-repeat"
   div
 
 main = ($scope,$timeout) ->
