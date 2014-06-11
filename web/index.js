@@ -5,7 +5,7 @@ CoordMapType = function(it){
   return this.tileSize = it, this;
 };
 CoordMapType.prototype.getTile = function(c, zoom, doc){
-  var div, ll1, ll2, ll3, ll4, twd1, twd2, twd3, twd4, twd, minx, maxx, miny, maxy, minlx, maxlx, minly, maxly, x$, y$;
+  var div, ll1, ll2, ll3, ll4, twd1, twd2, twd3, twd4, twd, minx, maxx, miny, maxy, minlx, maxlx, minly, maxly, x$, y$, ref$, z, x, y, dx, dy;
   div = doc.createElement('div');
   ll1 = tile.t2ll(c.x, c.y, zoom);
   ll2 = tile.t2ll(c.x + 1, c.y, zoom);
@@ -94,6 +94,16 @@ CoordMapType.prototype.getTile = function(c, zoom, doc){
   }
   if (type === 13) {
     div.style.background = "url(http://210.69.81.220/geo4oracle/mapagent/mapagent.fcgi?Request=GetMap&SERVICE=WMS&VERSION=1.1.1&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&SRS=EPSG:4326&FORMAT=image/png&LAYERS=,WMS/LAYER/TW/G97_TW_HAZZONE_P_2013F&width=256&height=256&BBOX=" + minlx + "," + minly + "," + maxlx + "," + maxly + ") center center no-repeat";
+  }
+  if (type === 14) {
+    if (zoom === 18) {
+      ref$ = [17, parseInt(c.x / 2), parseInt(c.y / 2)], z = ref$[0], x = ref$[1], y = ref$[2];
+      ref$ = [(c.x % 2) * 256, (c.y % 2) * 256], dx = ref$[0], dy = ref$[1];
+      div.style.background = "url(/tile/" + z + "/" + x + "/" + y + ".png) -" + dx + "px -" + dy + "px no-repeat";
+      div.style.backgroundSize = "512px 512px";
+    } else {
+      div.style.background = "url(/tile/" + zoom + "/" + c.x + "/" + c.y + ".png) center center no-repeat";
+    }
   }
   return div;
 };

@@ -45,6 +45,13 @@ CoordMapType.prototype.getTile = (c, zoom, doc) ->
   if type==11 => div.style.background = "url(http://210.69.81.220/geo4oracle/mapagent/mapagent.fcgi?Request=GetMap&SERVICE=WMS&VERSION=1.1.1&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&SRS=EPSG:4326&FORMAT=image/png&LAYERS=,WMS/LAYER/TW/G97_TW_DEPSLIDE_P_2013F&width=256&height=256&BBOX=#minlx,#minly,#maxlx,#maxly) center center no-repeat"
   if type==12 => div.style.background = "url(http://210.69.81.220/geo4oracle/mapagent/mapagent.fcgi?Request=GetMap&SERVICE=WMS&VERSION=1.1.1&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&SRS=EPSG:4326&FORMAT=image/png&LAYERS=,WMS/LAYER/TW/G97_TW_DEBRISPOTEN_P_2013F&width=256&height=256&BBOX=#minlx,#minly,#maxlx,#maxly) center center no-repeat"
   if type==13 => div.style.background = "url(http://210.69.81.220/geo4oracle/mapagent/mapagent.fcgi?Request=GetMap&SERVICE=WMS&VERSION=1.1.1&BGCOLOR=0xFFFFFF&TRANSPARENT=TRUE&SRS=EPSG:4326&FORMAT=image/png&LAYERS=,WMS/LAYER/TW/G97_TW_HAZZONE_P_2013F&width=256&height=256&BBOX=#minlx,#minly,#maxlx,#maxly) center center no-repeat"
+  if type==14 =>
+    if zoom == 18 =>
+      [z,x,y] = [17, parseInt(c.x / 2), parseInt(c.y / 2)]
+      [dx,dy] = [ ( (c.x % 2) ) * 256, ( (c.y % 2) ) * 256]
+      div.style.background = "url(/tile/#z/#x/#y.png) -#{dx}px -#{dy}px no-repeat"
+      div.style.backgroundSize = "512px 512px"
+    else div.style.background = "url(/tile/#zoom/#{c.x}/#{c.y}.png) center center no-repeat"
   div
 
 main = ($scope,$timeout) ->
