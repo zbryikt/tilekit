@@ -32,6 +32,20 @@ Usage
 
         lsc vector.ls [圖磚目錄]
 
+在前端使用
+
+        <script type="text/javascript" src="tilelayer.js"></script>
+        <script type="text/javascript">
+          layer = new TileLayer map, 
+          layer = new TileLayer({
+            map: you-google-map-instnce
+            url: your-tile-path-root
+            bv: your-vector-json-path
+            opacity: tile-opacity
+          });
+        </script>
+
+
 License
 ==================
 
