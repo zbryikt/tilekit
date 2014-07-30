@@ -23,18 +23,26 @@ import$(TileLayer.prototype, {
     return this.map.overlayMapTypes.setAt(0, this.visible ? this : null);
   },
   getTile: function(c, z, doc){
-    var div, x$, y$;
+    var x, y, div, x$, ref$, dx, dy;
+    x = c.x, y = c.y;
     div = doc.createElement('div');
-    if (this.vector && !check(this.vector, z, c.x, c.y)) {
-      return div;
+    x$ = div.style;
+    x$.width = this.tileSize.width + "px";
+    x$.height = this.tileSize.height + "px";
+    x$.opacity = this.opacity + "";
+    x$.backgroundPosition = "center center";
+    x$.backgroundAttachment = "no-repeat";
+    if (this.vector && !check(this.vector, z, x, y)) {
+      if (!(this.extend && check(this.vector, z - 1, parseInt(x / 2), parseInt(y / 2)))) {
+        return div;
+      }
+      ref$ = [(x % 2) * 256, (y % 2) * 256], dx = ref$[0], dy = ref$[1];
+      ref$ = [z - 1, parseInt(x / 2), parseInt(y / 2)], z = ref$[0], x = ref$[1], y = ref$[2];
+      div.style.backgroundPosition = "-" + dx + "px -" + dy + "px";
+      div.style.backgroundSize = "512px 512px";
     }
-    x$ = div;
-    y$ = x$.style;
-    y$.width = this.tileSize.width + "px";
-    y$.height = this.tileSize.height + "px";
-    y$.opacity = this.opacity + "";
-    y$.background = "url(" + this.url + "/" + z + "/" + c.x + "/" + c.y + ".png) center center no-repeat";
-    return x$;
+    div.style.backgroundImage = "url(" + this.url + "/" + z + "/" + x + "/" + y + ".png)";
+    return div;
   }
 });
 module == null && (module = {});

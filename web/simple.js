@@ -14,7 +14,8 @@ main = function($scope, $timeout){
       map: $scope.map,
       url: 'https://raw.githubusercontent.com/zbryikt/tile-cityusage/gh-pages/',
       bv: 'vector.json',
-      opacity: 0.5
+      opacity: 0.5,
+      extend: true
     });
   };
   return google.maps.event.addDomListener(window, 'load', function(){

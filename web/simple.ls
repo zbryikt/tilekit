@@ -8,5 +8,6 @@ main = ($scope,$timeout) ->
       url: \https://raw.githubusercontent.com/zbryikt/tile-cityusage/gh-pages/
       bv: \vector.json
       opacity: 0.5
+      extend: true
 
   google.maps.event.addDomListener window, \load, -> $scope.$apply -> $scope.init!

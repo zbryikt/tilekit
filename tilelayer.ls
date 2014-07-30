@@ -16,14 +16,23 @@ TileLayer.prototype <<< do
     @visible = if typeof(visible) == "undefined" => !@visible else visible
     @map.overlayMapTypes.setAt 0, if @visible => @ else null
   getTile: (c, z, doc) ->
+    {x,y} = c
     div = doc.createElement \div
-    if @vector and !check(@vector,z,c.x,c.y) => return div
+    div.style
+      ..width = "#{@tileSize.width}px"
+      ..height = "#{@tileSize.height}px"
+      ..opacity = "#{@opacity}"
+      ..backgroundPosition = "center center"
+      ..backgroundAttachment = "no-repeat"
+    if @vector and !check(@vector,z,x,y) =>
+      if !(@extend and check(@vector,z - 1, parseInt(x/2), parseInt(y/2))) => return div
+      [dx,dy] = [ ( (x % 2) ) * 256, ( (y % 2) ) * 256]
+      [z,x,y] = [z - 1, parseInt(x / 2), parseInt(y / 2)]
+      div.style.backgroundPosition = "-#{dx}px -#{dy}px"
+      div.style.backgroundSize = "512px 512px"
+    
+    div.style.backgroundImage = "url(#{@url}/#z/#{x}/#{y}.png)"
     div
-      ..style
-        ..width = "#{@tileSize.width}px"
-        ..height = "#{@tileSize.height}px"
-        ..opacity = "#{@opacity}"
-        ..background = "url(#{@url}/#z/#{c.x}/#{c.y}.png) center center no-repeat"
 
 module ?= {}
 module.exports = TileLayer
