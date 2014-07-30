@@ -42,8 +42,11 @@ Usage
             url: your-tile-path-root
             bv: your-vector-json-path
             opacity: tile-opacity
+            extend: true or false
           });
         </script>
+
+        * extend: 若圖層不存在, 是否用上一層的放大來代替? 
 
 
 License
