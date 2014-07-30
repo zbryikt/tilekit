@@ -2,8 +2,10 @@
 var TileLayer, module;
 TileLayer = function(config){
   var this$ = this;
-  this.visible = true;
   import$(this, config);
+  if (typeof this.visible === "undefined") {
+    this.visible = true;
+  }
   this.url = this.url.replace(/\/$/, "");
   this.tileSize = new google.maps.Size(256, 256);
   this.vector = null;
@@ -14,7 +16,9 @@ TileLayer = function(config){
   });
   this.map.overlayMapTypes.setAt(0, null);
   this.map.overlayMapTypes.insertAt(0, this);
-  this.layer = config.map.overlayMapTypes[0];
+  if (this.visible) {
+    this.map.overlayMapTypes.insertAt(0, this);
+  }
   return this;
 };
 import$(TileLayer.prototype, {

@@ -1,6 +1,6 @@
 TileLayer = (config) ->
-  @visible = true
   @ <<< config
+  if typeof(@visible)=="undefined" => @visible = true
   @url = @url.replace /\/$/, ""
   @tileSize = new google.maps.Size 256,256
   @vector = null
@@ -8,7 +8,7 @@ TileLayer = (config) ->
   .success (d) ~> @vector = d
   @map.overlayMapTypes.setAt 0, null
   @map.overlayMapTypes.insertAt 0, @
-  @layer = config.map.overlayMapTypes.0
+  if @visible => @map.overlayMapTypes.insertAt 0, @
   @
 
 TileLayer.prototype <<< do

@@ -38,15 +38,15 @@ Usage
         <script type="text/javascript">
           layer = new TileLayer map, 
           layer = new TileLayer({
-            map: you-google-map-instnce
-            url: your-tile-path-root
-            bv: your-vector-json-path
-            opacity: tile-opacity
-            extend: true or false
+            map: you-google-map-instnce,
+            url: your-tile-path-root,
+            bv: your-vector-json-path,
+            opacity: tile-opacity,
+            extend: true // zoom z - 1 if z tile doesn't exist
+            visible: true // show layer or not
           });
         </script>
 
-        * extend: 若圖層不存在, 是否用上一層的放大來代替? 
 
 
 License
