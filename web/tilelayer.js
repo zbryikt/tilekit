@@ -16,7 +16,7 @@ TileLayer = function(config){
   }
   this.tileSize = new google.maps.Size(256, 256);
   this.vector = null;
-  if (this.getimg) {
+  if (!this.getimg) {
     $.ajax({
       url: this.bv
         ? this.bv
@@ -30,7 +30,7 @@ TileLayer = function(config){
   if (this.visible) {
     this.map.overlayMapTypes.insertAt(this.idx, this);
   }
-  gms.e.addListener(this.map, 'zoom_changed', function(z){
+  google.maps.event.addListener(this.map, 'zoom_changed', function(z){
     return this$.onZoomChanged(this$.map.getZoom());
   });
   return this;

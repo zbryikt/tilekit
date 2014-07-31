@@ -10,9 +10,21 @@ main = function($scope, $timeout){
   };
   $scope.init = function(){
     $scope.map = new google.maps.Map(document.getElementById('map'), $scope.mapOption);
-    return $scope.layer = new TileLayer({
+    $scope.layer = new TileLayer({
+      name: 'landusage',
       map: $scope.map,
       url: 'https://raw.githubusercontent.com/zbryikt/tile-cityusage/gh-pages/',
+      getimg: function(z, x, y){
+        return "http://maps.nlsc.gov.tw/S_Maps/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&STYLE=_null&TILEMATRIXSET=EPSG:3857&TILEMATRIX=EPSG:3857:" + z + "&FORMAT=image/png&LAYER=nURBAN&TILEROW=" + y + "&TILECOL=" + x;
+      },
+      bv: 'vector.json',
+      opacity: 0.5,
+      extend: true
+    });
+    return $scope.layer2 = new TileLayer({
+      name: 'cityusage',
+      map: $scope.map,
+      url: 'http://static.foundi.info/cityusage/',
       bv: 'vector.json',
       opacity: 0.5,
       extend: true

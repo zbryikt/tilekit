@@ -7,12 +7,12 @@ TileLayer = (config) ->
   if @url => @url = @url.replace /\/$/, ""
   @tileSize = new google.maps.Size 256,256
   @vector = null
-  if @getimg =>
+  if !@getimg =>
     $.ajax url: (if @bv => @bv else "#{@url}/vector.json"), dataType: \json
     .success (d) ~> @vector = d
   @map.overlayMapTypes.setAt @idx, null
   if @visible => @map.overlayMapTypes.insertAt @idx, @
-  gms.e.addListener @map, \zoom_changed, (z) ~> @onZoomChanged @map.getZoom!
+  google.maps.event.addListener @map, \zoom_changed, (z) ~> @onZoomChanged @map.getZoom!
   @
 
 TileLayer.prototype <<< do
