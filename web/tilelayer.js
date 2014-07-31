@@ -3,28 +3,60 @@ var TileLayer, module;
 TileLayer = function(config){
   var this$ = this;
   import$(this, config);
+  this.idx = TileLayer.idx || 0;
+  TileLayer.idx = (TileLayer.idx || 0) + 1;
   if (typeof this.visible === "undefined") {
     this.visible = true;
   }
-  this.url = this.url.replace(/\/$/, "");
+  if (typeof this.enabled === "undefined") {
+    this.enabled = true;
+  }
+  if (this.url) {
+    this.url = this.url.replace(/\/$/, "");
+  }
   this.tileSize = new google.maps.Size(256, 256);
   this.vector = null;
-  $.ajax(this.bv
-    ? this.bv
-    : this.url + "/vector.json").success(function(d){
-    return this$.vector = d;
-  });
-  this.map.overlayMapTypes.setAt(0, null);
-  this.map.overlayMapTypes.insertAt(0, this);
-  if (this.visible) {
-    this.map.overlayMapTypes.insertAt(0, this);
+  if (this.getimg) {
+    $.ajax({
+      url: this.bv
+        ? this.bv
+        : this.url + "/vector.json",
+      dataType: 'json'
+    }).success(function(d){
+      return this$.vector = d;
+    });
   }
+  this.map.overlayMapTypes.setAt(this.idx, null);
+  if (this.visible) {
+    this.map.overlayMapTypes.insertAt(this.idx, this);
+  }
+  gms.e.addListener(this.map, 'zoom_changed', function(z){
+    return this$.onZoomChanged(this$.map.getZoom());
+  });
   return this;
 };
 import$(TileLayer.prototype, {
+  onZoomChanged: function(z){
+    if (typeof this.showLv === "undefined") {
+      return;
+    }
+    if (z < this.showLv) {
+      return this.disable();
+    } else if (!this.enabled) {
+      return this.enable();
+    }
+  },
+  enable: function(){
+    this.enabled = true;
+    return this.toggle(this.visible);
+  },
+  disable: function(){
+    this.enabled = false;
+    return this.toggle(this.visible);
+  },
   toggle: function(visible){
     this.visible = typeof visible === "undefined" ? !this.visible : visible;
-    return this.map.overlayMapTypes.setAt(0, this.visible ? this : null);
+    return this.map.overlayMapTypes.setAt(this.idx, this.visible && this.enabled ? this : null);
   },
   getTile: function(c, z, doc){
     var x, y, div, x$, ref$, dx, dy;
@@ -45,7 +77,9 @@ import$(TileLayer.prototype, {
       div.style.backgroundPosition = "-" + dx + "px -" + dy + "px";
       div.style.backgroundSize = "512px 512px";
     }
-    div.style.backgroundImage = "url(" + this.url + "/" + z + "/" + x + "/" + y + ".png)";
+    div.style.backgroundImage = this.getimg
+      ? "url(" + this.getimg(z, x, y) + ")"
+      : "url(" + this.url + "/" + z + "/" + x + "/" + y + ".png)";
     return div;
   }
 });

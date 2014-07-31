@@ -1,20 +1,38 @@
 TileLayer = (config) ->
   @ <<< config
+  @idx = TileLayer.idx or 0
+  TileLayer.idx = (TileLayer.idx or 0) + 1
   if typeof(@visible)=="undefined" => @visible = true
-  @url = @url.replace /\/$/, ""
+  if typeof(@enabled)=="undefined" => @enabled = true
+  if @url => @url = @url.replace /\/$/, ""
   @tileSize = new google.maps.Size 256,256
   @vector = null
-  $.ajax (if @bv => @bv else "#{@url}/vector.json")
-  .success (d) ~> @vector = d
-  @map.overlayMapTypes.setAt 0, null
-  @map.overlayMapTypes.insertAt 0, @
-  if @visible => @map.overlayMapTypes.insertAt 0, @
+  if @getimg =>
+    $.ajax url: (if @bv => @bv else "#{@url}/vector.json"), dataType: \json
+    .success (d) ~> @vector = d
+  @map.overlayMapTypes.setAt @idx, null
+  if @visible => @map.overlayMapTypes.insertAt @idx, @
+  gms.e.addListener @map, \zoom_changed, (z) ~> @onZoomChanged @map.getZoom!
   @
 
 TileLayer.prototype <<< do
+  onZoomChanged: (z) ->
+    if typeof(@showLv)=="undefined" => return
+    if z < @showLv => @disable!
+    else if !@enabled => @enable!
+
+  enable: ->
+    @enabled = true
+    @toggle @visible
+
+  disable: ->
+    @enabled = false
+    @toggle @visible
+
   toggle: (visible) ->
     @visible = if typeof(visible) == "undefined" => !@visible else visible
-    @map.overlayMapTypes.setAt 0, if @visible => @ else null
+    @map.overlayMapTypes.setAt @idx, if @visible and @enabled => @ else null
+
   getTile: (c, z, doc) ->
     {x,y} = c
     div = doc.createElement \div
@@ -30,8 +48,7 @@ TileLayer.prototype <<< do
       [z,x,y] = [z - 1, parseInt(x / 2), parseInt(y / 2)]
       div.style.backgroundPosition = "-#{dx}px -#{dy}px"
       div.style.backgroundSize = "512px 512px"
-    
-    div.style.backgroundImage = "url(#{@url}/#z/#{x}/#{y}.png)"
+    div.style.backgroundImage = if @getimg => "url(#{@getimg(z,x,y)})" else "url(#{@url}/#z/#{x}/#{y}.png)"
     div
 
 module ?= {}
