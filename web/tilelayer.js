@@ -16,11 +16,9 @@ TileLayer = function(config){
   }
   this.tileSize = new google.maps.Size(256, 256);
   this.vector = null;
-  if (!this.getimg) {
+  if (this.bv) {
     $.ajax({
-      url: this.bv
-        ? this.bv
-        : this.url + "/vector.json",
+      url: this.bv,
       dataType: 'json'
     }).success(function(d){
       return this$.vector = d;

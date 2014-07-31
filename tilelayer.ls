@@ -7,8 +7,8 @@ TileLayer = (config) ->
   if @url => @url = @url.replace /\/$/, ""
   @tileSize = new google.maps.Size 256,256
   @vector = null
-  if !@getimg =>
-    $.ajax url: (if @bv => @bv else "#{@url}/vector.json"), dataType: \json
+  if @bv =>
+    $.ajax url: @bv, dataType: \json
     .success (d) ~> @vector = d
   @map.overlayMapTypes.setAt @idx, null
   if @visible => @map.overlayMapTypes.insertAt @idx, @
