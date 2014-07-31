@@ -22,6 +22,7 @@ module.exports = do
           ..TILEMATRIX = "#{@form.TILEMATRIXSET}:#z"
           ..TILEROW = y
           ..TILECOL = x
+
   item:
     # from http://tgos.nat.gov.tw/tgos/Web/Service/TGOS_Service_Detail.aspx?SID=6777
     # live preview: http://maps.nlsc.gov.tw/
@@ -31,6 +32,20 @@ module.exports = do
     # http://maps.nlsc.gov.tw/S_Maps/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=URBAN
     #  &STYLE=_null&TILEMATRIXSET=EPSG:3857&TILEMATRIX=EPSG:3857:18&TILEROW=112219&TILECOL=219566&FORMAT=image/png
     # check http://maps.nlsc.gov.tw/S_Maps/wmts for service list, although land use is not inside.
+   
+    landusage_wmts:
+      type: \wmts
+      config:
+        X: 6
+        Y: 3
+        Z: 3
+        Z-MIN: 12
+        Z-MAX: 18
+        TILE-POWER:  0
+        SIZE: 256
+      form:
+        LAYER: \nURBAN
+        
     cityusage_wmts:
       type: \wmts
       config:
@@ -43,3 +58,4 @@ module.exports = do
         SIZE: 256
       form:
         LAYER: \URBAN
+
