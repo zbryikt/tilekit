@@ -44,6 +44,8 @@ Usage
             opacity: tile-opacity,
             extend: true // zoom z - 1 if z tile doesn't exist
             visible: true // show layer or not
+            enabled: true // is enabled.
+            getimg: function(z,x,y) {} // compose img url manually. suppress auto url and vector query
           });
         </script>
 
