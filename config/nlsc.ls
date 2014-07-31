@@ -40,7 +40,7 @@ module.exports = do
         Y: 3
         Z: 3
         Z-MIN: 12
-        Z-MAX: 18
+        Z-MAX: 17
         TILE-POWER:  0
         SIZE: 256
       form:
